@@ -158,28 +158,7 @@
 				android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
 				android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-			<activity android:name="com.mobvista.msdk.offerwall.view.MVOfferWallActivity"
-				android:configChanges="screenSize|orientation"
-				android:screenOrientation="portrait" />
-			<activity android:name="com.mobvista.msdk.offerwall.view.MVOfferWallRewardVideoActivity"
-				android:configChanges="keyboardHidden|orientation|screenSize"
-				android:screenOrientation="landscape"
-				android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-			<activity android:name="com.mobvista.msdk.reward.player.MVRewardVideoActivity"
-				android:configChanges="orientation|keyboardHidden|screenSize"
-				android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-			<activity android:name="com.mobvista.msdk.videofeeds.vfplayer.VideoFeedsActivity"
-				android:configChanges="keyboardHidden|orientation|screenSize"
-				android:screenOrientation="portrait" />
-			<activity android:name="com.mobvista.msdk.out.LoadingActivity" />
-			<activity android:name="com.mobvista.msdk.interstitial.view.MVInterstitialActivity"
-				android:configChanges="orientation|screenSize"
-				android:screenOrientation="portrait"
-				android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-			<activity android:name="com.mobvista.msdk.shell.MVActivity"
-				android:configChanges="keyboard|orientation"
-				android:screenOrientation="portrait"
-				android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+
 
 			<!--suppress AndroidDomInspection -->
 			<activity android:name="com.tapjoy.TJAdUnitActivity" android:configChanges="orientation|keyboardHidden|screenSize"
@@ -258,21 +237,7 @@
         <source-file src="libs/Android/unity_ads-2.1.0.jar" target-dir="libs" />
 
     	<source-file src="libs/Android/startapp-3.6.7.jar" target-dir="libs" />
-		<source-file src="libs/Android/mobvista_alphab.jar" target-dir="libs" />
-		<source-file src="libs/Android/mobvista_appwallext.jar" target-dir="libs" />
-		<source-file src="libs/Android/mobvista_mvjscommon.jar" target-dir="libs" />
 
-		<framework src="libs/Android/mobvista_appwall" custom="true" />
-		<framework src="libs/Android/mobvista_common" custom="true" />
-		<framework src="libs/Android/mobvista_interstitial" custom="true" />
-		<framework src="libs/Android/mobvista_mvdownloads" custom="true" />
-		<framework src="libs/Android/mobvista_mvnative" custom="true" />
-		<framework src="libs/Android/mobvista_nativeex" custom="true" />
-		<framework src="libs/Android/mobvista_offerwall" custom="true" />
-		<framework src="libs/Android/mobvista_playercommon" custom="true" />
-		<framework src="libs/Android/mobvista_reward" custom="true" />
-		<framework src="libs/Android/mobvista_videocommon" custom="true" />
-		<framework src="libs/Android/mobvista_videofeeds" custom="true" />
     </platform>
 
     <platform name="ios">
@@ -362,9 +327,7 @@
         <!-- Ironsource -->
         <framework custom="true" src="libs/iOS/Adapters/APDIronSourceAdapter.embeddedframework/IronSource.framework"/>
         <source-file src="libs/iOS/Adapters/APDIronSourceAdapter.embeddedframework/libAPDIronSourceAdapter.a" framework="true"/>
-        <!-- Mobvista -->
-        <framework custom="true" src="libs/iOS/Adapters/APDMobvistaAdapter.embeddedframework/MVSDK.framework"/>
-        <source-file src="libs/iOS/Adapters/APDMobvistaAdapter.embeddedframework/libAPDMobvistaAdapter.a" framework="true"/>
+
         <!-- MyTarget -->
         <framework custom="true" src="libs/iOS/Adapters/APDMyTargetAdapter.embeddedframework/MyTargetSDK.framework"/>
         <source-file src="libs/iOS/Adapters/APDMyTargetAdapter.embeddedframework/libAPDMyTargetAdapter.a" framework="true"/>
