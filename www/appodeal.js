@@ -29,9 +29,9 @@ Appodeal.Gender = {
 
 Appodeal.pluginVersion = '3.0.4';
 
-Appodeal.initialize = function(appKey, adType) {
+Appodeal.initialize = function(appKey, adType, consent, callback) {
 	exec(null, null, "AppodealPlugin", "setPluginVersion", [Appodeal.pluginVersion]);
-    exec(null, null, "AppodealPlugin", "initialize", [appKey, adType]);
+    exec(callback, null, "AppodealPlugin", "initialize", [appKey, adType, consent]);
 };
 
 Appodeal.show = function(adType, callback) {
@@ -150,28 +150,24 @@ Appodeal.canShowWithPlacement = function(adType, placement, callback) {
     exec(callback, null, "AppodealPlugin", "canShowWithPlacement", [adType, placement]);
 };
 
-Appodeal.setCustomBooleanRule = function(name, rule) {
-    exec(null, null, "AppodealPlugin", "setCustomBooleanRule", [name, rule]);
-};
-
-Appodeal.setCustomIntegerRule = function(name, rule) {
-    exec(null, null, "AppodealPlugin", "setCustomIntegerRule", [name, rule]);
-};
-
-Appodeal.setCustomDoubleRule = function(name, rule) {
-    exec(null, null, "AppodealPlugin", "setCustomDoubleRule", [name, rule]);
-};
-
-Appodeal.setCustomStringRule = function(name, rule) {
-    exec(null, null, "AppodealPlugin", "setCustomStringRule", [name, rule]);
-};
-
 Appodeal.getRewardParameters = function(callback) {
     exec(callback, null, "AppodealPlugin", "getRewardParameters", []);
 };
 
 Appodeal.getRewardParametersForPlacement = function(placement, callback) {
     exec(callback, null, "AppodealPlugin", "getRewardParametersForPlacement", [placement]);
+};
+
+Appodeal.setSegmentFilter = function(name, value) {
+    exec(null, null, "AppodealPlugin", "setSegmentFilter", [name, value]);
+};
+
+Appodeal.setExtraData = function(name, value) {
+    exec(null, null, "AppodealPlugin", "setExtraData", [name, value]);
+};
+
+Appodeal.getPredictedEcpm = function(adType, callback) {
+    exec(callback, null, "AppodealPlugin", "getPredictedEcpm", [adType]);
 };
 
 Appodeal.setAge = function(age) {

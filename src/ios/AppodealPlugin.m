@@ -120,6 +120,9 @@ int nativeShowStyleForType(int adTypes) {
             bannerOverlapBottom = false;
             bannerOverlapTop = true;
         }
+        
+        if (bannerOverlap)
+            [self changeWebViewWithOverlappedBanner];
     }
     CDVPluginResult* pluginResult = nil;
     if([Appodeal showAd:nativeShowStyleForType((int)[[[command arguments] objectAtIndex:0] integerValue]) rootViewController:[[UIApplication sharedApplication] keyWindow].rootViewController]) {
@@ -175,7 +178,7 @@ int nativeShowStyleForType(int adTypes) {
     }
     
     [Appodeal hideBanner];
-    if (bannerOverlap && bannerIsShowing) {
+    if (bannerOverlap) {
         [self returnNativeSize];
     }
     bannerIsShowing = false;
@@ -224,9 +227,6 @@ int nativeShowStyleForType(int adTypes) {
     if (![Appodeal isInitalized]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarDidChangeFrame:) name: UIApplicationDidChangeStatusBarFrameNotification object:nil];
         bannerOverlap = [[[command arguments] objectAtIndex:0] boolValue];
-        if (hasStatusBarPlugin) {
-            bannerOverlap = false;
-        }
     }
 }
 
@@ -330,35 +330,6 @@ int nativeShowStyleForType(int adTypes) {
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
-
-- (void) setCustomDoubleRule:(CDVInvokedUrlCommand*)command {
-    NSString *jsonString = [[command arguments] objectAtIndex:0];
-    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-    [Appodeal setCustomRule:json];
-}
-
-- (void) setCustomIntegerRule:(CDVInvokedUrlCommand*)command {
-    NSString *jsonString = [[command arguments] objectAtIndex:0];
-    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-    [Appodeal setCustomRule:json];
-}
-
-- (void) setCustomStringRule:(CDVInvokedUrlCommand*)command {
-    NSString *jsonString = [[command arguments] objectAtIndex:0];
-    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-    [Appodeal setCustomRule:json];
-}
-
-- (void) setCustomBooleanRule:(CDVInvokedUrlCommand*)command {
-    NSString *jsonString = [[command arguments] objectAtIndex:0];
-    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-    [Appodeal setCustomRule:json];
-}
-
 - (void) trackInAppPurchase:(CDVInvokedUrlCommand*)command {
     NSNumber *amount = [NSNumber numberWithInt:[[[command arguments] objectAtIndex:0] intValue]];
     [[APDSdk sharedSdk] trackInAppPurchase:amount currency:[[command arguments] objectAtIndex:0]];
@@ -430,6 +401,17 @@ int nativeShowStyleForType(int adTypes) {
     self.viewController.view.frame = bounds;
     [self.webView setFrame:bounds];
 }
+- (BOOL)isiPhoneX
+{
+    if (@available(iOS 11.0, *)) {
+        UIWindow *window = UIApplication.sharedApplication.keyWindow;
+        CGFloat topPadding = window.safeAreaInsets.top;
+        CGFloat bottomPadding = window.safeAreaInsets.bottom;
+        return topPadding > 20 || bottomPadding > 20;
+    } else {
+        return false;
+    }
+}
 
 - (void) changeWebViewWithOverlappedBanner {
     CGRect bounds = [self.viewController.view.window bounds];
@@ -449,10 +431,14 @@ int nativeShowStyleForType(int adTypes) {
             statusBarHeight = 20.f;
     }
 
+    float extraPadding = 0;
+    if ([self isiPhoneX]) {
+        extraPadding = 35;
+    }
     if (bannerOverlapTop) {
-        [self.webView setFrame:CGRectMake(bounds.origin.x, bounds.origin.y + bannerHeight + statusBarHeight, bounds.size.width, bounds.size.height - bannerHeight - statusBarHeight)];
+        [self.webView setFrame:CGRectMake(bounds.origin.x, bounds.origin.y + bannerHeight + statusBarHeight, bounds.size.width, bounds.size.height - bannerHeight - statusBarHeight - extraPadding)];
     } else if (bannerOverlapBottom) {
-        [self.webView setFrame:CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height - bannerHeight)];
+        [self.webView setFrame:CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height - bannerHeight - extraPadding)];
     }
 }
 
