@@ -24,12 +24,12 @@ repositories {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     
-    implementation 'com.google.android.gms:play-services-ads:17.+'
-    implementation 'com.google.android.gms:play-services-location:17.+'
-    implementation 'com.google.android.gms:play-services-gcm:17.+'
+    implementation 'com.google.android.gms:play-services-ads:+'
+    implementation 'com.google.android.gms:play-services-location:+'
+    implementation 'com.google.android.gms:play-services-gcm:+'
 	
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
-    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.+'
+    implementation 'com.android.support:support-v4:28.+'
 
     implementation 'com.google.code.gson:gson:2.8.4'
     implementation 'com.squareup.okhttp3:okhttp:3.7.0'
