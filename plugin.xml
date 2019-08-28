@@ -277,15 +277,7 @@
 				android:hardwareAccelerated="true" />
 			<!-- End Adcolony -->
 
-			<!-- Inmobi -->
-			<activity
-				android:name="com.inmobi.rendering.InMobiAdActivity"
-				android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize|screenLayout"
-				android:hardwareAccelerated="true"
-				android:resizeableActivity="false"
-				android:theme="@android:style/Theme.NoTitleBar"
-				tools:ignore="UnusedAttribute" />
-			<!-- End Inmobi -->
+
 
 			<!-- MyTarget -->
 			<activity
